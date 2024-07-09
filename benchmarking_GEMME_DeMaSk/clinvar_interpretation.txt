@@ -1,0 +1,13 @@
+Benign
+Benign,Likely benign,Benign
+not provided,not provided,Benign
+Benign,Benign
+not provided,Pathogenic,not provided
+Pathogenic,Pathogenic; risk factor
+no interpretation for the single variant,Pathogenic
+not provided,Pathogenic
+Pathogenic, Pathogenic, Pathogenic
+Pathogenic; risk factor
+Pathogenic,risk factor
+Pathogenic, Pathogenic
+Pathogenic
