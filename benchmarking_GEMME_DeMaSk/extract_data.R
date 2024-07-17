@@ -83,7 +83,7 @@ for (file in csv_files) {
       GEMME_values <- filtered_data$GEMME.Score
     
       # Check if GEMME values are not empty or 0
-      if (any(GEMME_values != "" & GEMME_values != 0, na.rm = TRUE)) {
+      if (any(!is.na(GEMME_values))) {
         GEMME_output <- data.frame(
           Protein = protein_name,
           Mutation = filtered_data$Mutation,
@@ -103,7 +103,7 @@ for (file in csv_files) {
       DeMaSk_values <- filtered_data$DeMaSk.delta.fitness
     
     # Check if DeMaSk values are not empty or 0
-      if (any(DeMaSk_values != "" & DeMaSk_values != 0, na.rm = TRUE)) {
+      if (any(!is.na(DeMaSk_values))) {
         DeMaSk_output <- data.frame(
           Protein = protein_name,
           Mutation = filtered_data$Mutation,

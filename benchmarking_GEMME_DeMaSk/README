@@ -8,7 +8,11 @@ It processes multiple CSV files, filters and combines the data based on specifie
 
 Requirements
 ------------
-- Ensure you have R installed on your system.
+- Ensure you have R installed on your system. The code has been tested with R version 4.3.2.
+- Required R packages:
+    base: Core R functions (included with R).
+    utils: Utility functions (included with R).
+    pROC: Tools for visualizing, smoothing, and comparing receiver operating characteristic (ROC) curves. Version 1.18.5.
 
 Setup
 -----
