@@ -32,36 +32,29 @@ total_rows_after_ClinVar_Classification_dir <- 0
 # Initialize a variable to store the count of rows extracting after review status
 files_remaining_after_review <- 0
 
-# Read lines from file
-lines <- readLines(clinvar_interpretation)
-
-# Skip the header line
-header <- lines[1]
-lines <- lines[-1]  # Remove the header line from 'lines'
+# Read data from file into a data frame
+clinvar_data <- read.csv(file = clinvar_interpretation, header = TRUE, sep = "\t", stringsAsFactors = FALSE, check.names = FALSE)
 
 # Initialize an empty list to store key-value pairs
 key_value_pairs <- list()
 
-# Loop through each line
-for (line in lines) {
-  # Split the line by tab (\t)
-  parts <- strsplit(line, "\t")[[1]]
-  
+# Loop through each row of the data frame
+for (i in 1:nrow(clinvar_data)) {
   # Extract key and value
-  key <- parts[1]
-  value <- parts[2]
+  key <- clinvar_data[i, "#ClinVar"]  # Replace "#ClinVar" with the actual column name of your key
+  value <- clinvar_data[i, "Internal_dictionary"]  # Replace "Internal_dictionary" with the actual column name of your value
   
   # Check if value is "Benign" or "Pathogenic"
   if (value %in% c("Benign", "Pathogenic")) {
     # Convert value to 0 for Benign, 1 for Pathogenic
-  if (value == "Pathogenic") {
-    value <- 1
-  } else if (value == "Benign") {
-    value <- 0
-  }
-  
-  # Store key with numeric value in the dictionary
-  key_value_pairs[[key]] <- value
+    if (value == "Pathogenic") {
+      value <- 1
+    } else if (value == "Benign") {
+      value <- 0
+    }
+    
+    # Store key with numeric value in the dictionary
+    key_value_pairs[[key]] <- value
   }
 }
 
