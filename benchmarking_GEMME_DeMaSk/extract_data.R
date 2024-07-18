@@ -32,6 +32,42 @@ total_rows_after_ClinVar_Classification_dir <- 0
 # Initialize a variable to store the count of rows extracting after review status
 files_remaining_after_review <- 0
 
+# Read lines from file
+lines <- readLines(clinvar_interpretation)
+
+# Skip the header line
+header <- lines[1]
+lines <- lines[-1]  # Remove the header line from 'lines'
+
+# Initialize an empty list to store key-value pairs
+key_value_pairs <- list()
+
+# Loop through each line
+for (line in lines) {
+  # Split the line by tab (\t)
+  parts <- strsplit(line, "\t")[[1]]
+  
+  # Extract key and value
+  key <- parts[1]
+  value <- parts[2]
+  
+  # Check if value is "Benign" or "Pathogenic"
+  if (value %in% c("Benign", "Pathogenic")) {
+    # Convert value to 0 for Benign, 1 for Pathogenic
+  if (value == "Pathogenic") {
+    value <- 1
+  } else if (value == "Benign") {
+    value <- 0
+  }
+  
+  # Store key with numeric value in the dictionary
+  key_value_pairs[[key]] <- value
+  }
+}
+
+# Extract keys from key_value_pairs into filter_words vector
+filter_words <- names(key_value_pairs)
+
 # Loop over each CSV file
 for (file in csv_files) {
   # Read the CSV file
@@ -57,12 +93,6 @@ for (file in csv_files) {
   # Filter rows with non-empty values in ClinVar.Interpretation column
   filtered_data <- data[!is.na(data$ClinVar.Interpretation) & data$ClinVar.Interpretation != "", ]
   
-  # Filter after ClinVar Classifications regarding directory 
-  # filtered_data <- filtered_data[filtered_data$ClinVar.Interpretation %in% c("Benign", "Pathogenic, Pathogenic, Pathogenic", "Pathogenic; risk factor", "Pathogenic, Pathogenic", "Pathogenic"), ]
-  
-  # Filter after ClinVar Classifications regarding MAVISp Interpretation file
-  filter_words <- scan(clinvar_interpretation, what="", sep="\n", quiet = TRUE)
-  
   # Filter the filtered_data dataframe using the filter_words
   filtered_data <- filtered_data[filtered_data$ClinVar.Interpretation %in% filter_words, ]
 
@@ -84,11 +114,15 @@ for (file in csv_files) {
     
       # Check if GEMME values are not empty or 0
       if (any(!is.na(GEMME_values))) {
+        # Map ClinVar.Interpretation to ClinVar.Conversion using key_value_pairs
+        filtered_data$ClinVar.Conversion <- sapply(filtered_data$ClinVar.Interpretation, function(key) key_value_pairs[[key]])
+
         GEMME_output <- data.frame(
           Protein = protein_name,
           Mutation = filtered_data$Mutation,
           GEMME_Score = GEMME_values,
           ClinVar_Interpretation = filtered_data$ClinVar.Interpretation,
+          ClinVar_Conversion = filtered_data$ClinVar.Conversion,
           ClinVar_Review_Status = filtered_data$ClinVar.Review.Status)
         combined_gemme_data <- rbind(combined_gemme_data, GEMME_output)
       } else {
@@ -104,11 +138,14 @@ for (file in csv_files) {
     
     # Check if DeMaSk values are not empty or 0
       if (any(!is.na(DeMaSk_values))) {
+        filtered_data$ClinVar.Conversion <- sapply(filtered_data$ClinVar.Interpretation, function(key) key_value_pairs[[key]])
+
         DeMaSk_output <- data.frame(
           Protein = protein_name,
           Mutation = filtered_data$Mutation,
           DeMaSk_Score = DeMaSk_values,
           ClinVar_Interpretation = filtered_data$ClinVar.Interpretation,
+          ClinVar_Conversion = filtered_data$ClinVar.Conversion,
           ClinVar_Review_Status = filtered_data$ClinVar.Review.Status)
         combined_demask_data <- rbind(combined_demask_data, DeMaSk_output)
       } else {

@@ -16,8 +16,8 @@ create_ROC_curve_and_save_results <- function(file_path, roc_plot_save_path, sen
   
   # Recoding the response variable to include all pathogenic and likely pathogenic as positive (1),
   # and benign as negative (0)
-  response <- ifelse(grepl("Pathogenic", df$ClinVar_Interpretation, ignore.case = TRUE), 1,
-                     ifelse(grepl("Benign", df$ClinVar_Interpretation, ignore.case = TRUE), 0, NA))
+  response <- ifelse(df$ClinVar_Conversion == 1, 1,
+                     ifelse(df$ClinVar_Conversion == 0, 0, NA))
   
   # Removing NA values
   predictor <- predictor[!is.na(response)]

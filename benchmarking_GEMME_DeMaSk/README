@@ -41,7 +41,7 @@ This script orchestrates the execution of all necessary scripts (see below) and 
 
 Example Run of run_ROC_analysis.sh: 
     ```
-    bash run_ROC_analysis.sh results_2_3 2,3 clinvar_interpretation.txt ../../data/1302024/biorxiv_13022024/simple_mode/dataset_tables/ 
+    bash run_ROC_analysis.sh results_2_3 2,3 clinvar_interpretation_internal_dictionary.txt ../../data/1302024/biorxiv_13022024/simple_mode/dataset_tables/ 
     ```
 
 By running the `run_ROC_analysis.sh` script, you automate the process and streamline the generation of ROC curves, making it convenient to rerun the analysis as needed.
