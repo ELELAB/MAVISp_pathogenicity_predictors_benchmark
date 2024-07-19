@@ -1,6 +1,0 @@
-Total number of all variants: 2829611 
-Number variants left with after ClinVar classification: 2735954 
-Number variants left after filtering ClinVar class. according dictionary: 2270 
-Number variants left after filtering review status: 855 
-Number variants for GEMME Score: 589 
-Number variants for DeMaSk Score: 855
