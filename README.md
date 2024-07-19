@@ -94,8 +94,38 @@ bash run_ROC_analysis.sh results_2_3 2,3 clinvar_interpretation.txt ../../data/1
 ```
 
 ## Specified Inputs and Outputs to Reproduce the Analysis
+### Overview
+To reproduce the analysis, three specific runs were performed using the run_ROC_analysis.sh script. Each run utilized the same input files but targeted different review statuses. The output of each run is saved in separate result folders.
 
-WIP
+### Input Files
+  - ClinVar Interpretation File: clinvar_interpretation_internal_dictionary.txt
+  - Dataset Tables Directory: dataset_tables_june-july2024/
+ 
+### Output Directories 
+Each run generates output files in a dedicated results directory:
+
+Run 1:
+Command: bash run_ROC_analysis.sh results_review-status-2-3 clinvar_interpretation_internal_dictionary.txt dataset_tables_june-july2024/
+Output Directory: results_review-status-2-3
+Description: This run targets review statuses 2 and 3.
+
+Run 2:
+Command: bash run_ROC_analysis.sh results_review-status-3-4 3,4 clinvar_interpretation_internal_dictionary.txt dataset_tables_june-july2024/
+Output Directory: results_review-status-3-4
+Description: This run targets review statuses 3 and 4.
+
+Run 3:
+Command: bash run_ROC_analysis.sh results_review-status-2-3-4 2,3,4 clinvar_interpretation_internal_dictionary.txt dataset_tables_june-july2024/
+Output Directory: results_review-status-2-3-4
+Description: This run targets review statuses 2, 3, and 4.
+
+Steps to Reproduce:
+  - Ensure that the clinvar_interpretation_internal_dictionary.txt file and the dataset_tables_june-july2024/ directory are available in your working directory and/or that you have their paths ready.
+  - Execute each run using the provided commands to generate the respective output directories.
+  - The results of each analysis will be saved in the corresponding output directory as specified above.
+  - By following these steps, you can reproduce the analysis and obtain the results for each specified review status.
+  - The specific output description is provided below.
+  
 
 ## Output
 
