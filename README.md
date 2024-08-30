@@ -105,18 +105,18 @@ To reproduce the analysis, three specific runs were performed using the run_ROC_
 Each run generates output files in a dedicated results directory:
 
 Run 1:
-Command: bash run_ROC_analysis.sh results_review-status-2-3 clinvar_interpretation_internal_dictionary.txt dataset_tables_june-july2024/
-Output Directory: results_review-status-2-3
+Command: `bash run_ROC_analysis.sh results_review-status-2-3 2,3 clinvar_interpretation_internal_dictionary.txt dataset_tables_june-july2024/`
+Output Directory: `results_review-status-2-3`
 Description: This run targets review statuses 2 and 3.
 
 Run 2:
-Command: bash run_ROC_analysis.sh results_review-status-3-4 3,4 clinvar_interpretation_internal_dictionary.txt dataset_tables_june-july2024/
-Output Directory: results_review-status-3-4
+Command: `bash run_ROC_analysis.sh results_review-status-3-4 3,4 clinvar_interpretation_internal_dictionary.txt dataset_tables_june-july2024/`
+Output Directory: `results_review-status-3-4`
 Description: This run targets review statuses 3 and 4.
 
 Run 3:
-Command: bash run_ROC_analysis.sh results_review-status-2-3-4 2,3,4 clinvar_interpretation_internal_dictionary.txt dataset_tables_june-july2024/
-Output Directory: results_review-status-2-3-4
+Command: `bash run_ROC_analysis.sh results_review-status-2-3-4 2,3,4 clinvar_interpretation_internal_dictionary.txt dataset_tables_june-july2024/`
+Output Directory: `results_review-status-2-3-4`
 Description: This run targets review statuses 2, 3, and 4.
 
 Steps to Reproduce:
